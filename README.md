@@ -1,7 +1,7 @@
 # BElogin News: import RSS feeds into sys_news
 
 This extension imports an RSS feed into the sys_news table of TYPO3,
-which makes them actually appear on the login-page of TYPO3 backend.
+which makes that news actually appear on the login-page of TYPO3 backend.
 
 ## History
 
@@ -12,7 +12,7 @@ after further development was stalled by the original authors due to different r
 ## Basic Configuration
 
 Install the extension via Installtool (composer version is in the planning), and see the extensions configuration in the extension manager
-or in the section "extension configuration of TYPO3 v9.5 and up.
+or in the section "extension configuration" of TYPO3 v9.5 and up.
 
 ## Add task to TYPO3 scheduler
 
