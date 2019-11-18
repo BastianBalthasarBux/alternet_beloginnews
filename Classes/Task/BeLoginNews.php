@@ -1,33 +1,12 @@
 <?php
 namespace AlterNET\AlternetBeloginnews\Task;
 
-/* * *************************************************************
- *  Copyright notice
- *
- *  (c) 2011-2015 alterNET internet BV <support@alternet.nl>
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
-
 use AlterNET\AlternetBeloginnews\Utility\Display;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 
 class BeLoginNews extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
@@ -76,37 +55,38 @@ class BeLoginNews extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         $this->initialize();
         $items = Display::getRssItems($this->configuration['rssFeed']);
         $storagePid = intval($this->configuration['sysNewsPid']);
+        
         // remove old records
-        $this->getDatabaseConnection()
-            ->exec_DELETEquery('sys_news',
-                'pid=' . $storagePid . BackendUtility::BEenableFields('sys_news') . BackendUtility::deleteClause('sys_news'));
-        $insertData = array();
-        $fields = array('pid', 'tstamp', 'crdate', 'title', 'content');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_news');
+        $queryBuilder
+            ->getRestrictions()
+            ->removeAll()
+            ->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+        
+        $affectedRows = $queryBuilder
+            ->delete('sys_news')
+            ->where(
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($storagePid))
+            )
+            ->execute();
+        
+        // insert new records
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $databaseConnectionForSysNews = $connectionPool->getConnectionForTable('sys_news');
         $numberOfItems = count($items);
         for ($i = 0; $i < $numberOfItems && $i < $this->configuration['maxItems']; $i++) {
-            $insertData[] = array(
-                $storagePid,
-                strtotime($items[$i]['pubdate']),
-                strtotime($items[$i]['pubdate']),
-                $items[$i]['title'],
-                trim(strip_tags($items[$i]['description'])) . ' <a href="' . htmlspecialchars(trim($items[$i]['link'])) . '" target="_blank">' .
-                $this->configuration['moreInfo'] . '</a>'
+            $insertData = [
+                "pid" => $storagePid,
+                "tstamp" => strtotime($items[$i]['pubdate']),
+                "crdate" => strtotime($items[$i]['pubdate']),
+                "title" => $items[$i]['title'],
+                "content" => trim(strip_tags($items[$i]['description'])) . '<br>' . trim($items[$i]['link']) . '<br>',
+            ];
+            $databaseConnectionForSysNews->insert(
+                'sys_news',
+                $insertData
             );
         }
-        if (!empty($insertData)) {
-            $this->getDatabaseConnection()->exec_INSERTmultipleRows('sys_news', $fields, $insertData);
-        }
-
         return true;
-    }
-
-    /**
-     * Wrapper for global database connection object
-     *
-     * @return DatabaseConnection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 }
