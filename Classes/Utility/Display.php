@@ -8,27 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Display
 {
-
-    /**
-     * Sets title of BE login news block for TYPO3 4.5 and later
-     *
-     * @static
-     * @return void
-     */
-    public static function displayNewsTitle()
-    {
-        $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['alternet_beloginnews']);
-        if (is_array($configuration)) {
-            if (!isset($configuration['rssFeed'])) {
-                return;
-            }
-            $title = $configuration['title'];
-            if (trim($title)) {
-                $GLOBALS['TYPO3_CONF_VARS']['BE']['loginNewsTitle'] = $title;
-            }
-        }
-    }
-
     /**
      * Retrieves RSS feed
      *

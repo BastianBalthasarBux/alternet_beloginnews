@@ -34,13 +34,6 @@ class BeLoginNews extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
             $title = $this->configuration['title'];
 
-            if (trim($title)) {
-                // Set title
-                $loginLabels = explode('|', $GLOBALS['TYPO3_CONF_VARS']['BE']['loginLabels']);
-                $loginLabels[8] = $title;
-                $GLOBALS['TYPO3_CONF_VARS']['BE']['loginLabels'] = implode('|', $loginLabels);
-            }
-
             $this->configuration['moreInfo'] = $languageService->sL('LLL:EXT:alternet_beloginnews/locallang_db.xml:more');
         }
     }
