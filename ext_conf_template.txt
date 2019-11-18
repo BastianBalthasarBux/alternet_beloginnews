@@ -1,0 +1,17 @@
+# cat=basic; type=int+; label=Folder where messages will be stored (TYPO3 4.5 and higher).
+sysNewsPid = 1
+
+# cat=basic; type=string; label=RSS Feed : The URL of the RSS Feed
+rssFeed = http://news.typo3.org/rss.xml
+
+# cat=basic; type=string; label=Title : The title of the news list
+title = TYPO3 News
+
+# cat=basic; type=int+; label=Max Items : The maximum number of items which are displayed
+maxItems = 3
+
+# cat=basic; type=int+; label=Cache time : Maximum life time before news is refreshed (TYPO3 4.4 and lower)
+cacheTime = 48
+
+# cat=basic; type=string; label=Language : Supported are "en", "de" and "nl"
+language = en

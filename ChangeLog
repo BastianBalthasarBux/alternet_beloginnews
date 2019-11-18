@@ -1,0 +1,31 @@
+2015-07-21 Jigal van Hemert (alterNET Internet BV) <support@alternet.nl>
+
+	* Dropped support for 4.x
+	* Raised TYPO3 dependency to minimum 6.2
+	* Compatibility with 7.x (without compatibility6 extension)
+
+2014-10-14 Jigal van Hemert (alterNET Internet BV) <support@alternet.nl>
+
+	* Removed code for 4.4
+	* Raised TYPO3 dependency to minimum 4.5
+	* Fixed bug in language handling (thanks to Stefan Berger)
+
+2014-04-24 Jigal van Hemert (alterNET Internet BV)  <support@alternet.nl>
+
+    * Compatibility for 6.2
+    * CGL changes
+    * removed extra whitespace around description to prevent too much empty space in 6.2 styling
+
+2013-03-26 Jigal van Hemert (alterNET Internet BV)  <support@alternet.nl>
+
+ 	* Compatibility for 6.1 and 6.0 (no namespaces yet, because of backwards compatibility)
+
+2012-06-26 Jigal van Hemert (alterNET Internet BV)  <support@alternet.nl>
+
+	* Compatibility fix for 4.6+: use loginNewsTitle
+	* Call scheduler task constructor if scheduler doesn't do this
+	* Test compatibility with TYPO3 4.7
+
+2011-01-21 Jigal van Hemert (alterNET Internet BV)  <support@alternet.nl>
+
+	* initial code generated with kickstarter
