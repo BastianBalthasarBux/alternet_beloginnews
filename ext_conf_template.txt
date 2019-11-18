@@ -2,7 +2,7 @@
 sysNewsPid = 1
 
 # cat=basic; type=string; label=RSS Feed : The URL of the RSS Feed
-rssFeed = http://news.typo3.org/rss.xml
+rssFeed = https://typo3.org/?type=100
 
 # cat=basic; type=string; label=Title : The title of the news list
 title = TYPO3 News

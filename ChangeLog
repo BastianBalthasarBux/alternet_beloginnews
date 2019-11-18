@@ -1,3 +1,11 @@
+2019-11-18 Clemens Riccabona (Riccabona eSolutions) <https://www.Riccabona.IT>
+    * Take over code and extension key
+    * Creation and initial upload of a github repository
+    * Dropped support for TYPO3 v7 and lower.
+    * Raised TYPO3 dependency to minimum 8.6.29
+    * Added Readme.md
+    * Some code formatting
+
 2015-07-21 Jigal van Hemert (alterNET Internet BV) <support@alternet.nl>
 
 	* Dropped support for 4.x

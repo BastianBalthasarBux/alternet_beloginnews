@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-	<meta type="array">
-		<type>database</type>
-		<description>Language labels for alternet_beloginnews</description>
-	</meta>
-	<data type="array">
-		<languageKey index="default" type="array">
-			<label index="more">More information</label>
-		</languageKey>
-		<languageKey index="nl" type="array">
-			<label index="more">Meer informatie</label>
-		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="more">Mehr Informationen</label>
-		</languageKey>
-	</data>
+    <meta type="array">
+        <type>database</type>
+        <description>Language labels for alternet_beloginnews</description>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="more">More information</label>
+        </languageKey>
+        <languageKey index="nl" type="array">
+            <label index="more">Meer informatie</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="more">Mehr Informationen</label>
+        </languageKey>
+    </data>
 </T3locallang>
