@@ -29,7 +29,7 @@ class BeLoginNews extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             $this->configuration['sysNewsPid'] =
                 isset($this->configuration['sysNewsPid']) ? $this->configuration['sysNewsPid'] : 1;
             $language = isset($this->configuration['language']) ? $this->configuration['language'] : 'en';
-            $languageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Lang\\LanguageService');
+            $languageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Localization\\LanguageService');
             $languageService->init($language);
 
             $title = $this->configuration['title'];
